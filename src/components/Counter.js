@@ -6,7 +6,7 @@ import { useState } from "react";
 const Counter = () => {
   const [show, setShow] = useState(true);
 
-  const counter = useSelector((state) => state.counter);
+  const { counter } = useSelector((state) => state.counter);
   const dispatch = useDispatch();
 
   const incrementHandler = () => {
@@ -28,6 +28,8 @@ const Counter = () => {
   const resetHandler = () => {
     dispatch({ type: "counter/reset" });
   };
+
+  console.log(counter)
 
   return (
     <main className={classes.counter}>
