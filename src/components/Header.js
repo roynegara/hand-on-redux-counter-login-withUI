@@ -1,15 +1,24 @@
-import {useSelector} from 'react-redux'
-import classes from './Header.module.css'
+import { useDispatch, useSelector } from "react-redux";
+import {logout} from "../features/authSlice";
+import classes from "./Header.module.css";
 
 const Header = () => {
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const { isLoggedIn } = useSelector((state) => state.isLoggedIn);
+  const dispatch = useDispatch();
+ 
 
-  console.log('header', isLoggedIn)
+  console.log("header", isLoggedIn);
+
+  const logoutHandler = () => {
+    dispatch(logout());
+  }
+ 
+  console.log('logoutheader', {logoutHandler})
 
   return (
     <header className={classes.header}>
       <h1>Dibimbing Redux Auth</h1>
-      {isLoggedIn && (
+      {isLoggedIn &&  (
         <nav>
           <ul>
             <li>
@@ -19,16 +28,16 @@ const Header = () => {
               <a href="/">My Sales</a>
             </li>
             <li>
-              <button>Logout</button>
+              <button onClick={logoutHandler} >Logout</button>
             </li>
           </ul>
         </nav>
       )}
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
 
 // import classes from './Header.module.css'
 
