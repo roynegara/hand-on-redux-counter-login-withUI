@@ -1,13 +1,14 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {  login, logout } from "../features/authSlice";
+import { login, logout } from "../features/authSlice";
 import classes from "./Auth.module.css";
 
 const Auth = () => {
-  const { isLoggedIn }  = useSelector((state) => state.isLoggedIn);
+  const { isLoggedIn } = useSelector((state) => state.isLoggedIn);
   const dispatch = useDispatch();
 
-  const loginHandler = () => {
+  const loginHandler = (event) => {
+    event.preventDefault();
     dispatch(login());
   };
 
@@ -15,7 +16,7 @@ const Auth = () => {
     dispatch(logout());
   };
 
-  console.log(isLoggedIn)
+  console.log("isLoggedIn auth", isLoggedIn);
 
   return (
     <main className={classes.auth}>
@@ -29,9 +30,8 @@ const Auth = () => {
             <label htmlFor="password">Password</label>
             <input type="password" id="password" />
           </div>
-         
-          {isLoggedIn ?  <button onClick={logoutHandler}>Logout</button> : <button onClick={loginHandler}>Login</button>}      
-          
+
+          {isLoggedIn ? <button onClick={logoutHandler}>Logout</button> : <button onClick={loginHandler}>Login</button>}
         </form>
       </section>
     </main>
